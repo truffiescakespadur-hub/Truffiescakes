@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<title>Truffies Cakes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: single column, one tall hero with cake mark, then menu cards, reviews, how to order, find us. Phone-first for Instagram visitors. */
+:root {
+  --bg: #fcf4f4;
+  --surface: #ffffff;
+  --fg: #3a2024;
+  --muted: #7a5f63;
+  --accent: #b02a4c;
+  --accent-fg: #ffffff;
+  --soft: #f6dde2;
+  --line: #ecd5d9;
+  --cocoa: #4a2a2e;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d1214; --surface: #2a1a1d; --fg: #f8e9eb; --muted: #c4a5aa;
+    --accent: #f0708f; --accent-fg: #2a0f16; --soft: #3a2327; --line: #45292e; --cocoa: #f0c9cf;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d1214; --surface: #2a1a1d; --fg: #f8e9eb; --muted: #c4a5aa;
+  --accent: #f0708f; --accent-fg: #2a0f16; --soft: #3a2327; --line: #45292e; --cocoa: #f0c9cf;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 16px/1.55 var(--font-body);
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; padding-block: 28px 40px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+p { margin: 0; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.label { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+.hero { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.hero svg { width: 132px; max-width: 40%; height: auto; }
+.hero h1 { font-size: clamp(2.6rem, 11vw, 4.4rem); font-weight: 800; letter-spacing: -0.03em; color: var(--cocoa); }
+.hero h1 span { color: var(--accent); }
+.lede { font-size: 1.1rem; color: var(--muted); max-width: 34ch; }
+.rating { display: inline-flex; gap: 10px; align-items: center; background: var(--soft); border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: .92rem; }
+.rating b { color: var(--accent); font-variant-numeric: tabular-nums; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-fg); }
+.btn.ghost { color: var(--accent); background: transparent; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.card h3 { font-size: 1.15rem; }
+.card p { color: var(--muted); font-size: .95rem; }
+.tag { align-self: flex-start; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: var(--soft); color: var(--cocoa); border-radius: 6px; padding: 3px 8px; }
+.note { margin-top: 16px; color: var(--muted); font-size: .95rem; }
+
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+blockquote { margin: 0; padding: 18px 20px; border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 12px 12px 0; font-weight: 500; min-width: 0; }
+blockquote small { display: block; margin-top: 6px; color: var(--muted); font-weight: 400; font-size: .8rem; }
+
+ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 14px; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+ol.steps li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; }
+ol.steps b { display: block; }
+ol.steps span { color: var(--muted); font-size: .95rem; }
+
+.find { background: var(--cocoa); color: var(--bg); border-radius: 20px; padding: 28px 22px; display: flex; flex-direction: column; gap: 18px; }
+.find h2 { color: var(--bg); }
+.find .label { color: inherit; opacity: .75; }
+.find dl { margin: 0; display: grid; grid-template-columns: 1fr; gap: 14px; }
+.find dd { margin: 4px 0 0; font-size: 1.05rem; overflow-wrap: anywhere; }
+.copy { font: inherit; font-size: .85rem; font-weight: 600; margin-left: 8px; padding: 4px 10px; border-radius: 8px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.find .btn.primary { background: var(--bg); color: var(--cocoa); border-color: var(--bg); }
+.find .btn.ghost { color: var(--bg); border-color: var(--bg); }
+footer { text-align: center; color: var(--muted); font-size: .85rem; }
+</style>
+
+</head>
+<body>
+<main>
+  <header class="hero">
+    <svg viewBox="0 0 120 120" role="img" aria-label="Layered cake with a cherry">
+      <ellipse cx="60" cy="108" rx="46" ry="7" fill="#e7c3ca" opacity=".55"/>
+      <rect x="22" y="70" width="76" height="34" rx="8" fill="#4a2a2e"/>
+      <rect x="22" y="70" width="76" height="9" rx="4" fill="#b02a4c"/>
+      <rect x="32" y="42" width="56" height="30" rx="8" fill="#7a4650"/>
+      <path d="M32 50c0-6 4-8 8-8h40c4 0 8 2 8 8-6 8-10 2-15 8-4 5-9-1-13 5-4-6-9 0-13-5-5-6-9 0-15-8z" fill="#f6dde2"/>
+      <circle cx="60" cy="33" r="9" fill="#b02a4c"/>
+      <path d="M60 24c1-8 6-12 12-13" stroke="#5f8a4e" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <p class="label">Home made · Pudupakkam</p>
+    <h1>Truffies <span>Cakes</span></h1>
+    <p class="lede">Soft, not-too-sweet cakes baked at home and made to order for your celebration.</p>
+    <p class="rating"><b>5.0</b> from 24 Google reviews</p>
+    <div class="actions">
+      <a class="btn primary" href="https://wa.me/919487122228" target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="btn ghost" href="https://maps.app.goo.gl/v9Ux4c1mKvK54S967?g_st=ac" target="_blank" rel="noopener">Get directions</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>What we bake</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="tag">Customer favourite</span>
+        <h3>Wheat &amp; jaggery cakes</h3>
+        <p>A lighter bake with wheat flour and jaggery. The butterscotch version is the one people keep coming back for.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Made to order</span>
+        <h3>Designed celebration cakes</h3>
+        <p>Birthdays and special days. Tell us the theme and we will design the cake around it, down to the small figurines.</p>
+      </article>
+      <article class="card">
+        <span class="tag">Always homemade</span>
+        <h3>Baked fresh for you</h3>
+        <p>Every cake is baked in a home kitchen after you order, so nothing sits on a shelf.</p>
+      </article>
+    </div>
+    <p class="note">Flavours and prices depend on size and design. Message us on WhatsApp for the current menu and a quote.</p>
+  </section>
+
+  <section>
+    <h2>What customers say</h2>
+    <div class="quotes">
+      <blockquote>Super soft. Not too sweet. Perfect taste!<small>Google review, butterscotch wheat jaggery cake</small></blockquote>
+      <blockquote>Must try the wheat and jaggery combination.<small>Google review</small></blockquote>
+      <blockquote>Ordered twice, and both cakes arrived exactly on time.<small>Google review, paraphrased</small></blockquote>
+    </div>
+  </section>
+
+  <section>
+    <h2>How to order</h2>
+    <ol class="steps">
+      <li><div><b>Message us on WhatsApp</b><span>Share the flavour, weight, design idea and the date you need it.</span></div></li>
+      <li><div><b>Confirm the design and price</b><span>We reply with a quote and any design questions.</span></div></li>
+      <li><div><b>Pick up or get it delivered</b><span>Your cake is ready on the day, on time.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="find" id="find-us">
+    <p class="label">Find us</p>
+    <h2>Pride Towers, Pacifica, Pudupakkam</h2>
+    <dl>
+      <div><p class="label">Address</p><dd>Pride Towers, Pacifica, Pudupakkam, Tamil Nadu 603103</dd></div>
+      <div><p class="label">Open</p><dd>Every day, 8:00 AM to 10:00 PM</dd></div>
+      <div><p class="label">Call</p><dd><span id="num">+91 63824 74360</span><button class="copy" id="copy" type="button">Copy</button></dd></div>
+      <div><p class="label">WhatsApp orders</p><dd>+91 94871 22228</dd></div>
+    </dl>
+    <div class="actions">
+      <a class="btn primary" href="https://wa.me/919487122228" target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="btn ghost" href="https://maps.app.goo.gl/v9Ux4c1mKvK54S967?g_st=ac" target="_blank" rel="noopener">Open in Google Maps</a>
+      <a class="btn ghost" href="https://www.instagram.com/truffiescakespadur" target="_blank" rel="noopener">Instagram @truffiescakespadur</a>
+    </div>
+  </section>
+
+  <footer>Truffies Cakes · Home made, Pudupakkam · <a href="https://www.instagram.com/truffiescakespadur" target="_blank" rel="noopener" style="color:inherit">@truffiescakespadur</a></footer>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy');
+  var num = document.getElementById('num');
+  btn.addEventListener('click', function () {
+    var text = num.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(num);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, fallback);
+    } catch (e) { fallback(); }
+    setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+  });
+})();
+</script>
+
+</body>
+</html>
